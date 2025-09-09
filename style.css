@@ -1,0 +1,222 @@
+/* --- Reset y Globales --- */
+:root {
+    --primary-color: #4A90E2;
+    --background-color: #F4F7F9;
+    --surface-color: #FFFFFF;
+    --text-color: #333;
+    --column-bg: #EAEFF2;
+    --shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    overscroll-behavior-x: none;
+}
+
+/* --- Header --- */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#header-title { font-size: 1.5rem; }
+
+#back-to-dashboard {
+    position: absolute;
+    left: 1rem;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* --- Contenedor Principal --- */
+#app-container {
+    padding: 1rem;
+}
+
+/* --- Dashboard (Lista de Tableros) --- */
+#dashboard-view {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.board-card {
+    background-color: var(--surface-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.board-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* --- Vista de Tablero (Kanban) --- */
+#board-view {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 1rem; /* Espacio para la sombra de las tarjetas */
+    scroll-snap-type: x mandatory;
+}
+
+.column {
+    flex: 0 0 300px;
+    margin-right: 1rem;
+    background-color: var(--column-bg);
+    border-radius: 8px;
+    padding: 0.75rem;
+    scroll-snap-align: start;
+}
+
+.column-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    font-weight: bold;
+}
+
+.cards-container {
+    min-height: 100px;
+    padding-top: 0.5rem;
+}
+
+.task-card {
+    background-color: var(--surface-color);
+    border-radius: 5px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    box-shadow: var(--shadow);
+    cursor: grab;
+    transition: background-color 0.2s;
+}
+
+.task-card.dragging {
+    opacity: 0.5;
+    background-color: #cce5ff;
+}
+
+/* --- Botón Flotante (FAB) --- */
+.fab {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 2rem;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.fab:hover { transform: scale(1.1); }
+
+/* --- Modales --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.visible { display: flex; }
+
+.modal-content {
+    background-color: var(--surface-color);
+    margin: auto;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    animation: slide-in 0.3s ease-out;
+}
+
+@keyframes slide-in {
+    from { transform: translateY(-30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close-btn {
+    color: #aaa;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-content h2 { margin-bottom: 1.5rem; }
+
+.modal-content input[type="text"], .modal-content textarea {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.modal-content button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.modal-content button:hover { background-color: #3a7ac8; }
+
+.modal-content button.danger {
+    background-color: #E74C3C;
+    margin-top: 0.5rem;
+}
+.modal-content button.danger:hover { background-color: #c0392b; }
+
+/* --- Utilidades --- */
+.hidden { display: none !important; }

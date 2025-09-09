@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanvo</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4A90E2">
+</head>
+<body>
+
+    <header>
+        <h1 id="header-title">Kanvo</h1>
+        <button id="back-to-dashboard" class="hidden">← Tableros</button>
+    </header>
+
+    <main id="app-container">
+        <!-- El contenido de la app se renderizará aquí -->
+    </main>
+
+    <button id="fab-add" class="fab">+</button>
+
+    <!-- Modal para crear nuevo tablero -->
+    <div id="new-board-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-board-modal">&times;</span>
+            <h2>Nuevo Tablero</h2>
+            <input type="text" id="new-board-name" placeholder="Nombre del proyecto..." autocomplete="off">
+            <button id="create-board-btn">Crear Tablero</button>
+        </div>
+    </div>
+
+    <!-- Modal para detalles de la tarjeta -->
+    <div id="card-detail-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-card-modal">&times;</span>
+            <h2 id="card-modal-title">Título de la Tarea</h2>
+            <p>En columna: <strong id="card-modal-column"></strong></p>
+            <textarea id="card-modal-desc" placeholder="Añadir una descripción más detallada..."></textarea>
+            <button id="save-card-btn">Guardar Cambios</button>
+            <button id="delete-card-btn" class="danger">Eliminar Tarea</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
